@@ -17,6 +17,7 @@ class JSONFile(object):
             raise ValueError("File is already closed")
         self._file_ref.seek(0)
         json.dump(data, self._file_ref)
+        self._file_ref.truncate()
 
     def close_file(self):
         self._file_ref.close()

@@ -81,6 +81,9 @@ while True:
             checks.append("There are no cameras checked out.")
         msgbox("\n".join(checks), "Checkouts")
     elif (c == "Remove student"):
+        if len(students) == 0:
+            msgbox("There are no students to delete.")
+            continue
         id = enterbox("Scan student's id.")
         for i in range(len(students)):
             s = students[i]
@@ -94,8 +97,11 @@ while True:
                     for c in cam_checkedout:
                         del checkouts[cam]
                     del students[i]
+                    student_file.write_to_file(students)
                 else:
                     msgbox("Deletion canceled.")
+        else:
+            msgbox("That student doesn't exist.")
     elif (c is None):
         break
 checkout_file.close_file()
